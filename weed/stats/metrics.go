@@ -70,6 +70,14 @@ var (
 			Help:      "replica placement mismatch",
 		}, []string{"collection", "id"})
 
+	MasterVolumeLayout = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: Namespace,
+			Subsystem: "master",
+			Name:      "volume_layout_total",
+			Help:      "Number of volumes in volume layouts",
+		}, []string{"collection", "replica", "type"})
+
 	MasterLeaderChangeCounter = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
 			Namespace: Namespace,
@@ -233,7 +241,13 @@ var (
 			Name:      "request_total",
 			Help:      "Counter of s3 requests.",
 		}, []string{"type", "code", "bucket"})
-
+	S3HandlerCounter = prometheus.NewCounterVec(
+		prometheus.CounterOpts{
+			Namespace: Namespace,
+			Subsystem: "s3",
+			Name:      "handler_total",
+			Help:      "Counter of s3 server handlers.",
+		}, []string{"type"})
 	S3RequestHistogram = prometheus.NewHistogramVec(
 		prometheus.HistogramOpts{
 			Namespace: Namespace,
@@ -259,6 +273,7 @@ func init() {
 	Gather.MustRegister(MasterReceivedHeartbeatCounter)
 	Gather.MustRegister(MasterLeaderChangeCounter)
 	Gather.MustRegister(MasterReplicaPlacementMismatch)
+	Gather.MustRegister(MasterVolumeLayout)
 
 	Gather.MustRegister(FilerRequestCounter)
 	Gather.MustRegister(FilerHandlerCounter)
@@ -283,6 +298,7 @@ func init() {
 	Gather.MustRegister(VolumeServerResourceGauge)
 
 	Gather.MustRegister(S3RequestCounter)
+	Gather.MustRegister(S3HandlerCounter)
 	Gather.MustRegister(S3RequestHistogram)
 	Gather.MustRegister(S3TimeToFirstByteHistogram)
 }

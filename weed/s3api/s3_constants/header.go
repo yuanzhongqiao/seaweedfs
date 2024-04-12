@@ -30,6 +30,7 @@ const (
 	// S3 user-defined metadata
 	AmzUserMetaPrefix    = "X-Amz-Meta-"
 	AmzUserMetaDirective = "X-Amz-Metadata-Directive"
+	AmzUserMetaMtime     = "X-Amz-Meta-Mtime"
 
 	// S3 object tagging
 	AmzObjectTagging          = "X-Amz-Tagging"
@@ -38,6 +39,7 @@ const (
 	AmzTagCount               = "x-amz-tagging-count"
 
 	X_SeaweedFS_Header_Directory_Key = "x-seaweedfs-is-directory-key"
+	X_SeaweedFS_Header_Upload_Id     = "X-Seaweedfs-Upload-Id"
 
 	// S3 ACL headers
 	AmzCannedAcl      = "X-Amz-Acl"
